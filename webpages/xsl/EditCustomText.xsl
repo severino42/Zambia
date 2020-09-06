@@ -30,9 +30,9 @@
     <div id="select_custom_text_item" class="control-group">
       <label for="custom_text_item" class="control-label">Entry to edit:</label>
       <div class="controls">
-        <select id="customtextid" name="customtextid" class="span4" onchange="UpdateTextEditor(this.options[this.selectedIndex].value)">
+        <select id="customtextid" name="customtextid" class="span4">
           <xsl:if test="$selected = ''">
-            <option value="">
+            <option value="-1">
               Select entry to edit
             </option>
           </xsl:if>
@@ -55,22 +55,17 @@
       </xsl:if>
       <label for="custom_text" class="control-label">Custom Text</label>
       <div class="controls">
-        <textarea id="textcontents" name="textcontents" rows="20" cols="80" style="width: 80%">
+        <textarea id="textcontents" name="textcontents" rows="15" style="width: 90%">
           <xsl:value-of select="$initialtext"/>
         </textarea>
       </div>
     </div>
     <div id="buttonBox" class="clearfix">
       <div class="pull-right">
-        <button class="btn" value="undo" onclick="ResetTextarea();">Reset</button>
-        <button class="btn btn-primary" type="submit" value="save" onclick="SaveTextaarea()">Save</button>
+        <button class="btn" id="resetbtn" name="resetbtn" value="undo" type="button">Reset</button>
+        <button class="btn btn-primary" id="submitbtn" name="submitbtn" type="submit" value="save" onclick="SaveTextaarea()">Save</button>
       </div>
     </div>
   </form>
-    <xsl:if test="$selected != ''">
-        <script language="javascript" defer="true">
-          enableTinyMCE();
-        </script>
-    </xsl:if>
   </xsl:template>
 </xsl:stylesheet>
