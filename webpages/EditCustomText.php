@@ -17,6 +17,9 @@ if (isLoggedIn() && may_I("Administrator")) {
             $message = "Session expired, no text updated";
         } else {
 			$selected = $_POST["customtextid"];
+			if ($selected == '-1') {
+                $selected = '';
+            }
 			if ($selected != '') {
 
 				$textcontents = $_POST["textcontents"];
