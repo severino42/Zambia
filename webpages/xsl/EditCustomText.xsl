@@ -18,10 +18,10 @@
         </div>
       </xsl:when>
     </xsl:choose>
-    <div class="container-fluid" style="background-color: #C9C9C9;">
-      <h2>Custom Text Entries</h2>
+    <div class="col-sm-3 offset-sm-3 mt-3" role="alert">
+      <h4 class="alert alert-dark" role="alert">Custom Text Entries</h4>
     </div>
-    <form name="customtextform" class="form-horizontal" method="POST" action="EditCustomText.php">
+    <form name="customtextform" method="POST" action="EditCustomText.php">
     <input type="hidden" id="PostCheck" name="PostCheck" value="POST"/>
     <input type="hidden" id="control" name="control" value="{$control}" />
     <input type="hidden" id="controliv" name="controliv" value="{$controliv}" />
@@ -29,9 +29,11 @@
       <input type="hidden" name="t{@customtextid}" id="t{@customtextid}" value="{@textcontents}"></input>
     </xsl:for-each>
 
-    <div id="select_custom_text_item" class="control-group">
-      <label for="custom_text_item" class="control-label">Entry to edit:</label>
-      <div class="controls">
+    <div id="select_custom_text_item" class="form-row">
+      <div class="col-1">
+        <label for="customtextid">Entry to edit:</label>
+      </div>
+      <div class="col">
         <select id="customtextid" name="customtextid" class="span4">
           <xsl:if test="$selected = ''">
             <option value="-1">
@@ -51,20 +53,22 @@
         </select>
       </div>
     </div>
-    <div id="texteditor" class="control-group">
+    <div id="texteditor" class="form-row">
       <xsl:if test="$selected = ''">
         <xsl:attribute name="style">display: none;</xsl:attribute>
       </xsl:if>
-      <label for="custom_text" class="control-label">Custom Text</label>
-      <div class="controls">
+      <div class="col-1">
+        <label for="textcontents">Custom Text</label>        
+      </div>     
+      <div class="col">
         <textarea id="textcontents" name="textcontents" rows="15" style="width: 90%">
           <xsl:value-of select="$initialtext"/>
         </textarea>
       </div>
     </div>
-    <div id="buttonBox" class="clearfix">
-      <div class="pull-right">
-        <button class="btn" id="resetbtn" name="resetbtn" value="undo" type="button">Reset</button>
+    <div class="text-center">
+      <div id="buttonBox" class="btn-group">
+        <button class="btn btn-secondary" id="resetbtn" name="resetbtn" value="undo" type="button">Reset</button>
         <button class="btn btn-primary" id="submitbtn" name="submitbtn" type="submit" value="save" onclick="SaveTextaarea()">Save</button>
       </div>
     </div>
