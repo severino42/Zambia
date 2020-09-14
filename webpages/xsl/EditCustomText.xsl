@@ -18,7 +18,7 @@
         </div>
       </xsl:when>
     </xsl:choose>
-    <div class="col-sm-3 offset-sm-3 mt-3" role="alert">
+    <div class="text-center" role="alert">
       <h4 class="alert alert-dark" role="alert">Custom Text Entries</h4>
     </div>
     <form name="customtextform" method="POST" action="EditCustomText.php">
