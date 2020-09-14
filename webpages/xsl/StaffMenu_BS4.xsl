@@ -108,7 +108,7 @@
                   <a class="dropdown-item" href="BuildReportMenus.php">Build Report Menus</a>
                 </xsl:if>
                 <xsl:if test="$Administrator">
-                  <a href="EditCustomText.php">Edit Custom Text</a>
+                  <a class="dropdown-item" href="EditCustomText.php">Edit Custom Text</a>
                 </xsl:if>
               </div>
             </div>

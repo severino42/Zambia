@@ -18,7 +18,9 @@
         </div>
       </xsl:when>
     </xsl:choose>
-    <h2>Custom Text Entries</h2>
+    <div class="container-fluid" style="background-color: #C9C9C9;">
+      <h2>Custom Text Entries</h2>
+    </div>
     <form name="customtextform" class="form-horizontal" method="POST" action="EditCustomText.php">
     <input type="hidden" id="PostCheck" name="PostCheck" value="POST"/>
     <input type="hidden" id="control" name="control" value="{$control}" />

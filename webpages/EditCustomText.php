@@ -1,6 +1,7 @@
 <?php
 // Copyright (c) 2011-2020 Peter Olszowka. All rights reserved. See copyright document for more details.
 global $message_error, $title, $linki, $session;
+$bootstrap4 = true;
 $title = "Edit Custom Text";
 require_once('StaffCommonCode.php');
 $message = "";
@@ -8,7 +9,7 @@ $rows = 0;
 $textcontents = 'hidden-empty';
 $selected = '';
 
-staff_header($title);
+staff_header($title, $bootstrap4);
 if (isLoggedIn() && may_I("Administrator")) {
 	if (isset($_POST["PostCheck"])) {
 		$priorValues = interpretControlString($_POST["control"], $_POST["controliv"]);
