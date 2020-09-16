@@ -25,9 +25,6 @@
     <input type="hidden" id="PostCheck" name="PostCheck" value="POST"/>
     <input type="hidden" id="control" name="control" value="{$control}" />
     <input type="hidden" id="controliv" name="controliv" value="{$controliv}" />
-    <xsl:for-each select="/doc/query[@queryName='custom_text']/row">
-      <input type="hidden" name="t{@customtextid}" id="t{@customtextid}" value="{@textcontents}"></input>
-    </xsl:for-each>
 
     <div id="select_custom_text_item" class="form-row">
       <div class="col-1">
@@ -42,6 +39,9 @@
           </xsl:if>
           <xsl:for-each select="/doc/query[@queryName='custom_text']/row">
             <option value="{@customtextid}">
+              <xsl:attribute name="data-initialtext">
+                <xsl:value-of select="@textcontents"/>
+              </xsl:attribute>
               <xsl:if test="@customtextid = $selected">
                 <xsl:attribute name="selected">selected</xsl:attribute>
               </xsl:if>

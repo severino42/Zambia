@@ -3,8 +3,9 @@
 var EditCustomText = function () {
 
     var currentCustomTextID = -1;
+    var initialCustomText = "";
 
-    function UpdateTextEditor(customtextid) {
+    function UpdateTextEditor(customtextid, initialtext) {
         tinyMCE.remove();
 
         if (currentCustomTextID < 0 && customtextid >= 0) {
@@ -12,8 +13,9 @@ var EditCustomText = function () {
         }
 
         currentCustomTextID = customtextid;
+        initialCustomText = initialtext;
 
-        document.getElementById("textcontents").value = document.getElementById('t' + customtextid.toString()).value;
+        document.getElementById("textcontents").value = initialtext;
         document.getElementById("texteditor").style.display = 'block';
    
         tinymce.init({
@@ -37,7 +39,7 @@ var EditCustomText = function () {
 
     function ResetTextarea() {
         if (currentCustomTextID >= 0) {
-            UpdateTextEditor(currentCustomTextID);
+            UpdateTextEditor(currentCustomTextID, initialCustomText);
         }
         return false;
     };
@@ -47,14 +49,15 @@ var EditCustomText = function () {
             tinyMCE.triggerSave();
             mysubmit();
             return true;
-        }
+        };
         return false;
     }
 
     function UpdateSelected() {
         var e = document.getElementById("customtextid");
         var strValue = e.options[e.selectedIndex].value;
-        UpdateTextEditor(strValue);
+        var strText = e.options[e.selectedIndex].dataset.initialtext;
+        UpdateTextEditor(strValue, strText);
     };
 
     this.initialize = function () {
@@ -67,8 +70,10 @@ var EditCustomText = function () {
         e = document.getElementById("customtextid");
         e.addEventListener('change', UpdateSelected);
         var strValue = e.options[e.selectedIndex].value;
-        if (strValue >= 0)
-            UpdateTextEditor(strValue);
+        if (strValue >= 0) {
+            var strText = e.options[e.selectedIndex].dataset.initialtext;
+            UpdateTextEditor(strValue, strText);
+        }
 
         return true;
     };
