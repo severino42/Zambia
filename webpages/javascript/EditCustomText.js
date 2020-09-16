@@ -9,14 +9,14 @@ var EditCustomText = function () {
         tinyMCE.remove();
 
         if (currentCustomTextID < 0 && customtextid >= 0) {
-            document.getElementById("customtextid").remove(0);
-        }
+            $("#customtextid option[value='-1']").remove();
+        };
 
         currentCustomTextID = customtextid;
         initialCustomText = initialtext;
 
-        document.getElementById("textcontents").value = initialtext;
-        document.getElementById("texteditor").style.display = 'block';
+        $('#textcontents').val(initialtext);
+        $('#texteditor').css("display", "block");
    
         tinymce.init({
             selector: 'textarea#textcontents',
@@ -40,7 +40,7 @@ var EditCustomText = function () {
     function ResetTextarea() {
         if (currentCustomTextID >= 0) {
             UpdateTextEditor(currentCustomTextID, initialCustomText);
-        }
+        };
         return false;
     };
 
@@ -51,12 +51,24 @@ var EditCustomText = function () {
             return true;
         };
         return false;
-    }
+    };
 
     function UpdateSelected() {
-        var e = document.getElementById("customtextid");
-        var strValue = e.options[e.selectedIndex].value;
-        var strText = e.options[e.selectedIndex].dataset.initialtext;
+        if (currentCustomTextID >= 0) {
+            tinyMCE.triggerSave();
+            
+            var newText = document.getElementById("textcontents").value; // Jquery returned Undefined for this, using document. method
+            var newAlt = newText.replace(/^<p>/i, "");
+            newAlt = newAlt.replace(/<\/p>\s*$/i, "");
+            if (newText != initialCustomText && newAlt != initialCustomText) {
+                if (confirm("Discard changes?") == false) {
+                    $('#customtextid').val(currentCustomTextID);
+                    return false;                    
+                };
+            };
+        };
+        var strValue = $('#customtextid').val();
+        var strText = $('#customtextid').find(':selected').data("initialtext");
         UpdateTextEditor(strValue, strText);
     };
 
@@ -73,7 +85,7 @@ var EditCustomText = function () {
         if (strValue >= 0) {
             var strText = e.options[e.selectedIndex].dataset.initialtext;
             UpdateTextEditor(strValue, strText);
-        }
+        };
 
         return true;
     };

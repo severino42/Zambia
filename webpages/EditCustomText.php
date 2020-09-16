@@ -30,7 +30,7 @@ if (isLoggedIn() && may_I("Administrator")) {
 				}
 
 
-				$origcontents = $_POST["t" . $selected];
+				$origcontents = $priorValues[$selected];
 
 				if ($origcontents != $textcontents) {
 					$query = <<<EOD
@@ -72,6 +72,12 @@ EOD;
 
 	$result = mysqli_query_exit_on_error($query);
 	$resultXML = mysql_result_to_XML("custom_text", $result);
+
+	mysqli_data_seek($result, 0);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $PriorArray[$row["customtextid"]] = $row["textcontents"];
+    }
+	mysqli_free_result($result);
 
 	$PriorArray["getSessionID"] = session_id();
 
