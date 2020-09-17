@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
-	Created by Peter Olszowka on 2020-06-01;
+	Created by Syd Weinstein on 2020-09-03;
 	Copyright (c) 2020 Peter Olszowka. All rights reserved. See copyright document for more details.
 -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -11,15 +11,13 @@
   <xsl:param name="initialtext" select="''"/>
   <xsl:output encoding="UTF-8" indent="yes" method="html" />
   <xsl:template match="/">
-    <xsl:choose>
-      <xsl:when test="$UpdateMessage != ''">
-        <div class="alert alert-success">
-          <xsl:value-of select="$UpdateMessage" disable-output-escaping="yes"/>
-        </div>
-      </xsl:when>
-    </xsl:choose>
-    <div class="text-center" role="alert">
-      <h4 class="alert alert-dark" role="alert">Custom Text Entries</h4>
+    <xsl:if test="$UpdateMessage != ''">
+      <div class="alert alert-success mt-4">
+        <xsl:value-of select="$UpdateMessage" disable-output-escaping="yes"/>
+      </div>
+    </xsl:if>
+    <div class="row justify-content-center mt-4">
+      <h4 class="col-auto">Custom Text Entries</h4>
     </div>
     <form name="customtextform" method="POST" action="EditCustomText.php">
     <input type="hidden" id="PostCheck" name="PostCheck" value="POST"/>
@@ -66,11 +64,13 @@
         </textarea>
       </div>
     </div>
-    <div class="text-center">
-      <div id="buttonBox" class="btn-group">
+    <div class="row justify-content-center mt-4">
+      <div class="col-auto">
         <button class="btn btn-secondary" id="resetbtn" name="resetbtn" value="undo" type="button">Reset</button>
-        <button class="btn btn-primary" id="submitbtn" name="submitbtn" type="submit" value="save" onclick="SaveTextaarea()">Save</button>
       </div>
+        <div class="col-auto">
+          <button class="btn btn-primary" id="submitbtn" name="submitbtn" type="submit" value="save" onclick="SaveTextaarea()">Save</button>
+        </div>
     </div>
   </form>
   </xsl:template>
